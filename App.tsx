@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 
-// --- Sub-componentes ---
+// --- Sub-componentes (Consolidados para evitar erros de rota de arquivo no Vercel) ---
 
 const Header = () => (
   <header className="text-center">
@@ -40,6 +40,7 @@ const Benefits = () => {
 const VSL = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  
   const togglePlay = () => {
     if (videoRef.current) {
       if (isPlaying) videoRef.current.pause();
@@ -47,6 +48,7 @@ const VSL = () => {
       setIsPlaying(!isPlaying);
     }
   };
+
   return (
     <div onClick={togglePlay} className="relative w-full max-w-[400px] h-[550px] md:h-[700px] mx-auto rounded-[20px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.4)] mb-[2rem] border-[3px] border-white/20 animate-fadeInUp cursor-pointer group" style={{ animationDelay: '0.5s' }}>
       <video ref={videoRef} className="w-full h-full object-cover block" playsInline disablePictureInPicture controlsList="nodownload">
@@ -111,9 +113,16 @@ const ProductGrid = () => {
 };
 
 const OfferBox = () => {
-  const bonuses = ["+ De 100 Fornecedores", "Curso Loja Online Lucrativa", "Vender Shopee/ML/Magalu", "Suporte WhatsApp", "Acesso Atualizações", "Calculadora Precificação"];
+  const bonuses = [
+    "+ De 100 Fornecedores", 
+    "Curso Loja Online Lucrativa", 
+    "Vender Shopee/ML/Magalu", 
+    "Suporte WhatsApp", 
+    "Acesso Atualizações", 
+    "Calculadora Precificação"
+  ];
   return (
-    <div id="oferta" className="scroll-mt-24 bg-white text-[#ff0077] p-[2.5rem] rounded-[24px] text-center shadow-[0_20px_50px_rgba(0,0,0,0.3)] max-w-[700px] w-full mx-auto animate-[fadeInUp_0.8s_ease-out_0.6s_both]">
+    <div id="oferta" className="scroll-mt-24 bg-white text-[#ff0077] p-[clamp(1.5rem,5vw,2.5rem)] rounded-[24px] text-center shadow-[0_20px_50px_rgba(0,0,0,0.3)] max-w-[700px] w-full mx-auto animate-[fadeInUp_0.8s_ease-out_0.6s_both]">
       <img alt="Logo" className="max-w-[180px] mx-auto mb-6" src="https://i.imgur.com/b4Br2EJ.png" />
       <div className="my-6 space-y-3 text-left max-w-sm mx-auto font-semibold">
         {bonuses.map((b, i) => <div key={i}><span className="text-green-500">✅</span> {b}</div>)}
@@ -122,7 +131,7 @@ const OfferBox = () => {
         <span className="line-through text-red-400">De R$67,00</span>
         <span className="text-[2rem] font-black text-green-500">Por R$19,90</span>
       </div>
-      <a href="https://checkout.payt.com.br/2c22eb0d3a71bc2b7b917d89d55f4dae?payment=pix" className="w-full bg-gradient-to-br from-[#ff3399] to-[#ff66cc] text-white p-4 block rounded-2xl font-bold text-xl shadow-lg">GARANTIR AGORA</a>
+      <a href="https://pay.cakto.com.br/39q58kw_727253" className="w-full bg-gradient-to-br from-[#ff3399] to-[#ff66cc] text-white p-4 block rounded-2xl font-bold text-xl shadow-lg transition-transform active:scale-95">GARANTIR AGORA</a>
       <p className="mt-4 text-gray-400 text-sm italic">Compra 100% segura | Garantia de 7 dias</p>
     </div>
   );
@@ -130,23 +139,23 @@ const OfferBox = () => {
 
 const UrgencyBar = () => (
   <div className="mt-8 bg-white/10 p-6 rounded-3xl text-center border border-white/20 animate-[fadeInUp_0.8s_ease-out_0.7s_both]">
-    <i className="fas fa-exclamation-triangle text-yellow-300 text-4xl mb-2 animate-shake"></i>
+    <i className="fas fa-exclamation-triangle text-yellow-300 text-4xl mb-2 animate-shake mx-auto block"></i>
     <h2 className="font-black text-2xl uppercase">VAGAS ESGOTANDO!</h2>
     <div className="w-full h-8 bg-white/20 rounded-full my-4 overflow-hidden">
-      <div className="h-full w-[87%] bg-gradient-to-r from-orange-400 to-red-500 animate-pulse flex items-center justify-center font-bold text-white">87%</div>
+      <div className="h-full w-[87%] bg-gradient-to-r from-orange-400 to-red-500 animate-pulse flex items-center justify-center font-bold text-white text-xs">87%</div>
     </div>
-    <p>Restam apenas 7 vagas com o desconto promocional!</p>
+    <p className="text-sm">Restam apenas 7 vagas com o desconto promocional!</p>
   </div>
 );
 
 const StickyFooter = ({ isVisible }: { isVisible: boolean }) => (
   <div className={`fixed bottom-0 left-0 w-full p-4 z-[999] transition-all duration-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
     <div className="bg-white rounded-2xl p-4 shadow-2xl flex items-center justify-between max-w-4xl mx-auto border border-pink-100">
-      <div className="hidden sm:block">
-        <p className="text-pink-600 font-black">🔥 OFERTA LIMITADA!</p>
-        <p className="text-gray-500 text-xs">Preço pode subir a qualquer momento</p>
+      <div className="hidden sm:block text-pink-600">
+        <p className="font-black leading-none">🔥 OFERTA LIMITADA!</p>
+        <p className="text-gray-500 text-[10px] font-bold">Últimas 7 vagas com 70% OFF</p>
       </div>
-      <a href="#oferta" className="bg-pink-600 text-white px-6 py-3 rounded-xl font-bold flex-1 sm:flex-none text-center">GARANTIR VAGA</a>
+      <a href="#oferta" className="bg-pink-600 text-white px-6 py-3 rounded-xl font-bold flex-1 sm:flex-none text-center text-sm shadow-lg active:scale-95 transition-transform">GARANTIR MINHA VAGA</a>
     </div>
   </div>
 );
@@ -155,18 +164,23 @@ const StickyFooter = ({ isVisible }: { isVisible: boolean }) => (
 
 const App: React.FC = () => {
   const [showSticky, setShowSticky] = useState(false);
+
   useEffect(() => {
-    const handleScroll = () => setShowSticky(window.scrollY > 400);
+    const handleScroll = () => {
+      setShowSticky(window.scrollY > 400);
+    };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-[#ff0077] to-[#ff65a3] text-white flex flex-col items-center relative overflow-x-hidden pt-12 md:pt-14">
-      <div className="fixed top-0 left-0 w-full bg-white text-[#ff0077] py-2 text-center font-black text-xs md:text-sm z-[1000] animate-pulse">
+      {/* Alerta Superior */}
+      <div className="fixed top-0 left-0 w-full bg-white text-[#ff0077] py-2 text-center font-black text-xs md:text-sm z-[1000] animate-pulse shadow-md">
         ATENÇÃO: ÚLTIMAS VAGAS NO VALOR PROMOCIONAL!
       </div>
       
+      {/* Container Principal */}
       <div className="container w-full max-w-[800px] flex flex-col gap-[2.5rem] relative z-[1] animate-fadeInUp p-[2rem_1rem]">
         <Header />
         <Benefits />
@@ -175,10 +189,12 @@ const App: React.FC = () => {
         <ProductGrid />
         <OfferBox />
         <UrgencyBar />
+        
         <footer className="text-center py-12 text-white/40 text-[0.7rem] uppercase tracking-wider mb-20">
           © 2026 Sua Lista de Fornecedores Exclusiva
         </footer>
       </div>
+
       <StickyFooter isVisible={showSticky} />
     </div>
   );
