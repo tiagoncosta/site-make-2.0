@@ -42,7 +42,7 @@ export const OfferBox: React.FC = () => {
         </div>
 
         <a 
-          href="https://checkout.payt.com.br/2c22eb0d3a71bc2b7b917d89d55f4dae?payment=pix#" 
+          href="https://pay.cakto.com.br/39q58kw_727253" 
           className="botao-compraa inline-flex items-center justify-center gap-[0.5rem] bg-gradient-to-br from-[#ff3399] to-[#ff66cc] text-white p-[1.1rem_2.8rem] text-[1.1rem] font-bold rounded-[16px] no-underline transition-all duration-300 shadow-[0_10px_30px_rgba(255,51,153,0.4)] cursor-pointer relative overflow-hidden whitespace-nowrap group mt-0 w-full"
         >
           <div className="absolute top-1/2 left-1/2 w-0 h-0 rounded-full bg-white/30 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 group-hover:w-[300px] group-hover:h-[300px]"></div>
